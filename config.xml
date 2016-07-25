@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<widget id="com.ionicframework.ledcube368472" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+  <gap:config-file platform="android" parent="/manifest">
+    <application android:debuggable="false" />
+  </gap:config-file>
+  <name>Led Cube</name>
+  <description>
+        Application to control Led Cube
+    </description>
+  <author email="chris.borrill@gmail.com">Chris Borrill</author>
+  <content src="index.html"/>
+  <icon src="icon.png"/>
+  <splash src="splash.png"/>
+  <preference name="SplashScreen" value="screen" />
+  <preference name="webviewbounce" value="false"/>
+  <preference name="UIWebViewBounce" value="false"/>
+  <preference name="DisallowOverscroll" value="true"/>
+  <preference name="SplashScreenDelay" value="2000"/>
+  <preference name="FadeSplashScreenDuration" value="500"/>
+  <preference name="android-minSdkVersion" value="16"/>
+  <preference name="BackupWebStorage" value="none"/>
+  <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1"/>
+  <plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0"/>
+  <plugin name="cordova-plugin-splashscreen" source="npm" spec="~3.2.1"/>
+  <allow-intent href="https://api.particle.io/*"/>
+  <platform name="android"/>
+</widget>
