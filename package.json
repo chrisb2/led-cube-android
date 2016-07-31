@@ -22,5 +22,9 @@
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [],
+  "scripts": {
+    "apk": "gulp sass && phonegap remote run android",
+    "sass": "gulp sass"
+  }
 }
