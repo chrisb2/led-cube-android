@@ -19,9 +19,9 @@
   <preference name="FadeSplashScreenDuration" value="500"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
-  <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1"/>
-  <plugin name="cordova-plugin-network-information" source="npm" spec="~1.2.0"/>
-  <plugin name="cordova-plugin-splashscreen" source="npm" spec="~3.2.1"/>
+  <plugin name="cordova-plugin-whitelist" source="npm" spec="1.2.2"/>
+  <plugin name="cordova-plugin-network-information" source="npm" spec="1.2.1"/>
+  <plugin name="cordova-plugin-splashscreen" source="npm" spec="3.2.2"/>
   <allow-intent href="https://api.particle.io/*"/>
   <platform name="android"/>
 </widget>
