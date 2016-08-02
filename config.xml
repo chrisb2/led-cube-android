@@ -12,11 +12,14 @@
   <icon src="icon.png"/>
   <splash src="splash.png"/>
   <preference name="SplashScreen" value="screen" />
+  <preference name="SplashScreenDelay" value="5000"/>
+  <preference name="FadeSplashScreenDuration" value="500"/>
+  <preference name="FadeSplashScreen" value="true" />
+  <preference name="AutoHideSplashScreen" value="false" />
+  <preference name="ShowSplashScreenSpinner" value="false" />
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
-  <preference name="SplashScreenDelay" value="3000"/>
-  <preference name="FadeSplashScreenDuration" value="1000"/>
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
   <plugin name="cordova-plugin-whitelist" source="npm" spec="1.2.2"/>

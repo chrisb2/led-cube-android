@@ -26,6 +26,14 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
     { name: 'Pyramid', value: 16 }
   ]
 
+  $scope.$on('$ionicView.loaded', function() {
+    ionic.Platform.ready( function() {
+      if(navigator && navigator.splashscreen) {
+        navigator.splashscreen.hide();
+      }
+    });
+  });
+
   window.onresize = function() {
     if ($scope.settings.sequence === 2) {
       scrollItemIntoView($scope.settings.effect);
