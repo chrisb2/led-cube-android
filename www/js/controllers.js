@@ -26,6 +26,12 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
     { name: 'Pyramid', value: 16 }
   ]
 
+  window.onresize = function() {
+    if ($scope.settings.sequence === 2) {
+      scrollItemIntoView($scope.settings.effect);
+    }
+  };
+
   $scope.onOff = function() {
     var argValue = $scope.settings.powerOn ? '1' : '0';
     particleFunctionCall('power', argValue);
@@ -68,7 +74,7 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
           $scope.networkOk = true;
 
           if ($scope.settings.sequence === 2) {
-            scrollItemIntoView($scope.settings.effect);            
+            scrollItemIntoView($scope.settings.effect);
           }
         });
         console.log('Variable called successfully:', $scope.settings);
