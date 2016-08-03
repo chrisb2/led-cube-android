@@ -1,4 +1,4 @@
-angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope, $location, $ionicScrollDelegate, cubeStateFactory) {
+angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope, $location, $ionicScrollDelegate, $ionicPlatform, cubeStateFactory) {
 
   $scope.networkOk = true;
   $scope.apiInProgress = false;
@@ -25,6 +25,10 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
     { name: 'Random Path', value: 15 },
     { name: 'Pyramid', value: 16 }
   ]
+
+  $ionicPlatform.on('resume', function(event) {
+    $scope.settings = JSON.parse(window.localStorage.getItem("state"));
+  });
 
   $scope.$on('$ionicView.loaded', function() {
     ionic.Platform.ready( function() {
@@ -79,6 +83,7 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
           $scope.apiInProgress = false;
           $scope.settings = JSON.parse(data.body.result);
           $scope.networkOk = true;
+          window.localStorage.setItem("state", JSON.stringify($scope.settings));
 
           if ($scope.settings.sequence === 2) {
             scrollItemIntoView($scope.settings.effect);
