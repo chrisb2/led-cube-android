@@ -54,7 +54,6 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
     $scope.settings.effect = effectValue;
     var argValue = effectValue.toString();
     particleFunctionCall('effect', argValue);
-    scrollItemIntoView($scope.settings.effect);
   };
 
   $scope.sequenceChange = function(sequenceValue) {
