@@ -1,5 +1,7 @@
 angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope, $location, $ionicScrollDelegate, $ionicPlatform, cubeStateFactory) {
 
+  var stateKey = 'state';
+
   $scope.networkOk = true;
   $scope.apiInProgress = false;
   $scope.settings = undefined;
@@ -27,7 +29,7 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
   ]
 
   $ionicPlatform.on('resume', function(event) {
-    $scope.settings = JSON.parse(window.localStorage.getItem("state"));
+    retrieveState();
   });
 
   $scope.$on('$ionicView.loaded', function() {
@@ -70,6 +72,14 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
     initializeState();
   };
 
+  function persistState() {
+    window.localStorage.setItem(stateKey, JSON.stringify($scope.settings));
+  };
+
+  function retrieveState() {
+    $scope.settings = JSON.parse(window.localStorage.getItem(stateKey));
+  };
+
   function scrollItemIntoView(itemId) {
     $location.hash('ledCube-list-ind-item'+itemId);
     $ionicScrollDelegate.anchorScroll();
@@ -83,7 +93,7 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
           $scope.apiInProgress = false;
           $scope.settings = JSON.parse(data.body.result);
           $scope.networkOk = true;
-          window.localStorage.setItem("state", JSON.stringify($scope.settings));
+          persistState();
 
           if ($scope.settings.sequence === 2) {
             scrollItemIntoView($scope.settings.effect);
