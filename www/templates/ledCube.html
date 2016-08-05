@@ -15,7 +15,7 @@
                 <ion-item ng-model="settings.sequence" ng-click="sequenceChange(0)" ng-class="{'active' : settings.sequence === 0}" class="positive  " id="ledCube-list-prg-item1">Sequence</ion-item>
                 <ion-item ng-model="settings.sequence" ng-click="sequenceChange(1)" ng-class="{'active' : settings.sequence === 1}" class="positive  " id="ledCube-list-prg-item2">Random</ion-item>
                 <div class="item item-divider">Individual</div>
-                <ion-item ng-repeat="effect in effects" ng-model="settings.effect" ng-click="settings.sequence = 2; effectChange({{effect.value}});" ng-class="{'active' : settings.effect === {{effect.value}} && settings.sequence === 2}" class="positive  " id="ledCube-list-ind-item{{effect.value}}">{{effect.name}}</ion-item>
+                <ion-item ng-repeat="effect in effects track by effect.value" ng-model="settings.effect" ng-click="settings.sequence = 2; effectChange({{effect.value}});" ng-class="{'active' : settings.effect === {{effect.value}} && settings.sequence === 2}" class="positive  " id="ledCube-list-ind-item{{effect.value}}">{{effect.name}}</ion-item>
             </ion-list>
         </div>
     </ion-content>

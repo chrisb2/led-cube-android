@@ -1,4 +1,4 @@
-angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope, $location, $ionicScrollDelegate, $ionicPlatform, cubeStateFactory) {
+angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope, $location, $ionicScrollDelegate, $ionicPlatform, $log, cubeStateFactory) {
 
   var stateKey = 'state';
 
@@ -99,14 +99,14 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
             scrollItemIntoView($scope.settings.effect);
           }
         });
-        console.log('Variable called successfully:', $scope.settings);
+        $log.debug('Variable called successfully:', $scope.settings);
       },
       function(err) {
         $scope.$apply(function(){
           $scope.apiInProgress = false;
           $scope.networkOk = false;
         });
-        console.log('An error occurred:', err);
+        $log.debug('An error occurred:', err);
       });
   };
 
@@ -118,14 +118,22 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
           $scope.apiInProgress = false;
           $scope.networkOk = true;
         });
-        console.log('Function ' + functionName + '(' + argValue + ') called successfully:', data.body.return_value);
+        $log.debug('Function ' + functionName + '(' + argValue + ') called successfully:', data.body.return_value);
       },
       function(err) {
         $scope.$apply(function(){
           $scope.apiInProgress = false;
           $scope.networkOk = false;
         });
-        console.log('An error occurred on function ' + functionName + ':', err);
+        $log.debug('An error occurred on function ' + functionName + ':', err);
       });
   }
 })
+
+angular.module('app.controllers').config(function($logProvider) {
+  $logProvider.debugEnabled(false);
+});
+
+angular.module('app.controllers').config(function($compileProvider) {
+  $compileProvider.debugInfoEnabled(false);
+});
