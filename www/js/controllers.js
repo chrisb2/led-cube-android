@@ -4,7 +4,7 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
 
   $scope.networkOk = true;
   $scope.apiInProgress = false;
-  $scope.settings = undefined;
+  $scope.settings = { "brightness": "0" }; // default value
 
   initializeState();
 
