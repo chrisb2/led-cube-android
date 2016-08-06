@@ -22,5 +22,14 @@ angular.module('app.services', []).factory('cubeStateFactory', [function(){
     return fnPr;
   };
 
+  factory.onStateEvent = function() {
+    var fnPr = particle.getEventStream({
+      deviceId: PARTICLE_DEVICE_ID,
+      name: 'stateChange',
+      auth: PARTICLE_TOKEN
+    });
+    return fnPr;
+  };
+
   return factory;
 }]);

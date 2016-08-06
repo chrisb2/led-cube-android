@@ -87,19 +87,14 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
 
   function initializeState() {
     $scope.apiInProgress = true;
+    cubeStateFactory.onStateEvent().then(function(stream) {
+      stream.on('event',function(event) {
+        updateSettings(event.data);
+      })
+    });
     cubeStateFactory.getState().then(
       function(data) {
-        $scope.$apply(function(){
-          $scope.apiInProgress = false;
-          $scope.settings = JSON.parse(data.body.result);
-          $scope.networkOk = true;
-          persistState();
-
-          if ($scope.settings.sequence === 2) {
-            scrollItemIntoView($scope.settings.effect);
-          }
-        });
-        $log.debug('Variable called successfully:', $scope.settings);
+        updateSettings(data.body.result);
       },
       function(err) {
         $scope.$apply(function(){
@@ -109,6 +104,20 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
         $log.debug('An error occurred:', err);
       });
   };
+
+  function updateSettings(settingsString) {
+    $scope.$apply(function(){
+      $scope.apiInProgress = false;
+      $scope.settings = JSON.parse(settingsString);
+      $scope.networkOk = true;
+      persistState();
+
+      if ($scope.settings.sequence === 2) {
+        scrollItemIntoView($scope.settings.effect);
+      }
+      $log.debug('Settings updated:', $scope.settings);
+    });
+  }
 
   function particleFunctionCall(functionName, argValue) {
     $scope.apiInProgress = true;
