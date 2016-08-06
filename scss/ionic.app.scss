@@ -19,7 +19,18 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
+//@import "www/lib/ionic/scss/ionic";
+@import "www/lib/ionic/scss/ionicons/ionicons";
+@import "www/lib/ionic/scss/_mixins";
+@import "www/lib/ionic/scss/_variables";
+@import "www/lib/ionic/scss/_reset";
+@import "www/lib/ionic/scss/_scaffolding";
+@import "www/lib/ionic/scss/_type";
+@import "www/lib/ionic/scss/_bar";
+@import "www/lib/ionic/scss/_items";
+@import "www/lib/ionic/scss/_list";
+@import "www/lib/ionic/scss/_range";
+@import "www/lib/ionic/scss/_spinner";
 
 .bar-subheader.custom {
     height: 70px !important;
