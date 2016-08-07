@@ -1,4 +1,4 @@
-angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope, $location, $ionicScrollDelegate, $ionicPlatform, $log, cubeStateFactory) {
+angular.module('app.controllers', ['in-viewport']).controller('ledCubeCtrl', function($scope, $location, $ionicScrollDelegate, $ionicPlatform, $log, cubeStateFactory) {
 
   var stateKey = 'state';
 
@@ -7,6 +7,11 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
   $scope.settings = { "brightness": "0" }; // default value
 
   initializeState();
+
+  $scope.programs = [
+    { name: 'Sequence', value: 0 },
+    { name: 'Random', value: 1 }
+  ]
 
   $scope.effects = [
     { name: 'Introduction', value: 0 },
@@ -41,14 +46,7 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
   });
 
   window.onresize = function() {
-    if ($scope.settings.sequence === 2) {
-      scrollItemIntoView($scope.settings.effect);
-    }
-  };
-
-  $scope.onOff = function() {
-    var argValue = $scope.settings.powerOn ? '1' : '0';
-    particleFunctionCall('power', argValue);
+    scrollItemIntoView();
   };
 
   $scope.brightnessChange = function() {
@@ -80,10 +78,19 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
     $scope.settings = JSON.parse(window.localStorage.getItem(stateKey));
   };
 
-  function scrollItemIntoView(itemId) {
-    $location.hash('ledCube-list-ind-item'+itemId);
-    $ionicScrollDelegate.anchorScroll();
-  }
+  function scrollItemIntoView() {
+    if ($scope.settings.sequence === 2) {
+      if (!$scope.effects[$scope.settings.effect].visible) {
+        $location.hash('ledCube-list-ind-item'+$scope.settings.effect);
+        $ionicScrollDelegate.anchorScroll();
+      }
+    } else {
+      if (!$scope.programs[$scope.settings.sequence].visible) {
+        $location.hash('ledCube-list-prg-item'+$scope.settings.sequence);
+        $ionicScrollDelegate.anchorScroll();
+      }
+    }
+  };
 
   function initializeState() {
     $scope.apiInProgress = true;
@@ -111,13 +118,10 @@ angular.module('app.controllers', []).controller('ledCubeCtrl', function($scope,
       $scope.settings = JSON.parse(settingsString);
       $scope.networkOk = true;
       persistState();
-
-      if ($scope.settings.sequence === 2) {
-        scrollItemIntoView($scope.settings.effect);
-      }
+      scrollItemIntoView();
       $log.debug('Settings updated:', $scope.settings);
     });
-  }
+  };
 
   function particleFunctionCall(functionName, argValue) {
     $scope.apiInProgress = true;

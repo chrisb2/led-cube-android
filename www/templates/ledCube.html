@@ -1,21 +1,29 @@
-<ion-view title="Led Cube" id="page1" class=" ">
+<ion-view title="Led Cube" id="page1" class=" " viewport>
       <ion-header-bar class="bar bar-subheader custom">
         <form id="ledCube-form2" class="list ">
             <ion-item class="range range-positive" id="ledCube-brightness">
               <i class="icon ion-ios-sunny-outline large-ion" ></i>
-              <input ng-model="settings.brightness" ng-model-options="{debounce: 500}" ng-change="brightnessChange()" type="range" value="settings.brightness" min="-1" max="15" name="brightness">
+              <input ng-model="settings.brightness" ng-model-options="{debounce: 500}" ng-change="brightnessChange()"
+                type="range" value="settings.brightness" min="-1" max="15" name="brightness">
               <i class="icon ion-ios-sunny large-ion" ></i>
             </ion-item>
         </form>
       </ion-header-bar>
       <ion-content padding="true" class="has-subheader-custom">
         <div class="item item-body " id="ledCube-list-item-container">
-            <ion-list id="ledCube-list" class=" ">
+            <ion-list id="ledCube-list" class=" " >
                 <div class="item item-divider">Programs</div>
-                <ion-item ng-model="settings.sequence" ng-click="sequenceChange(0)" ng-class="{'active' : settings.sequence === 0}" class="positive  " id="ledCube-list-prg-item1">Sequence</ion-item>
-                <ion-item ng-model="settings.sequence" ng-click="sequenceChange(1)" ng-class="{'active' : settings.sequence === 1}" class="positive  " id="ledCube-list-prg-item2">Random</ion-item>
+                <ion-item ng-repeat="program in programs track by program.value" ng-model="settings.sequence"
+                  ng-click="sequenceChange({{program.value}});"
+                  ng-class="{'active' : settings.sequence === {{program.value}}}"
+                  class="positive  " id="ledCube-list-prg-item{{program.value}}"
+                  viewport-leave="program.visible = false" viewport-enter="program.visible = true">{{program.name}}</ion-item>
                 <div class="item item-divider">Individual</div>
-                <ion-item ng-repeat="effect in effects track by effect.value" ng-model="settings.effect" ng-click="settings.sequence = 2; effectChange({{effect.value}});" ng-class="{'active' : settings.effect === {{effect.value}} && settings.sequence === 2}" class="positive  " id="ledCube-list-ind-item{{effect.value}}">{{effect.name}}</ion-item>
+                <ion-item ng-repeat="effect in effects track by effect.value" ng-model="settings.effect"
+                  ng-click="settings.sequence = 2; effectChange({{effect.value}});"
+                  ng-class="{'active' : settings.effect === {{effect.value}} && settings.sequence === 2}"
+                  class="positive  " id="ledCube-list-ind-item{{effect.value}}"
+                  viewport-leave="effect.visible = false" viewport-enter="effect.visible = true">{{effect.name}}</ion-item>
             </ion-list>
         </div>
     </ion-content>
